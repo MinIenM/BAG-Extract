@@ -1,0 +1,100 @@
+
+ ____    _    ____   _____      _                  _     Versie: 1.4
+| __ )  / \  / ___| | ____|_  _| |_ _ __ __ _  ___| |_    _      januari 2010
+|  _ \ / _ \| |  _  |  _| \ \/ / __| '__/ _` |/ __| __| _|+|_
+| |_) / ___ \ |_| | | |___ >  <| |_| | | (_| | (__| || |+++++|
+|____/_/   \_\VROM| |_____/_/\_\ __|_|  \__,_|\___|\__|  |+|
+
+
+BAG Extract+ is een tool voor opslag van een BAG-extract in een lokale 
+Postgres/Postgis database en ontsluiting van de BAg-gegevens vanuit deze 
+database.
+
+BAG Extract+ biedt de volgende functionaliteit:
+ - Laden van een BAG Extract
+ - Laden van een BAG Mutatiebestand
+ - Raadplegen van de gegevens in de lokale database
+ - Vergelijken van de BAG gegevens met eigen data
+ - Onderhoud van de lokale database
+
+
+De Python broncodebestanden, herkenbaar aan de extensie .py, kunnen worden 
+geopend en bewerkt met de Python-editor IDLE. Na wijzigen van de broncode 
+kan een nieuwe executable worden gemaakt met het batchbestand 
+makeBAGextract+.bat. 
+Ook kan een pythonprogramma worden uitgevoerd door in de commandline het 
+broncodebestand, inclusief de extensie .py, uit te voeren. In dat geval 
+worden .pyc bestanden met gecompileerde Pythoncode aangemaakt. Deze bestanden 
+kunnen worden verwijderd.
+
+
+Deze map bevat de broncode van de BAG Extract+ tool. Deze map heeft de 
+volgende inhoud:
+ - exe	Map met de executable van de tool, de configuratiefile en de bijbehorende 
+	libraries. In deze map kunnen de programmma's worden uitgevoerd. 
+
+ - BAG.conf
+	Configuratiebestand dat nodig is bij het uitvoeren van de programma's. 
+	Dit bestand bevat de volgende instellingen:
+	- database naam van de Postgres database
+	- host     host waar de Postgres database draait
+	- user     user voor toegang tot de Postgres database
+	- password password van de user voor toegang tot de Postgres database
+	- download directory waar gedownloade extract en mutatiebestanden worden 
+		   gelezen
+	- extract  directory waarin gedownloade extract en mutatiebestanden worden 
+		   uitgepakt (unzip)
+	- logging  directory waar logfiles worden opgeslagen.
+
+ - BAGextract+.py
+	Python broncode van het hoofdprogramma BAGextract+. Dit programma bestaat uit 
+	1 sourcefile waarin de algemene libraries worden included. 
+
+ - BAGraadpleeg.py
+	Python broncode van het zoek- en raadpleegscherm.
+
+ - libBAGextractPlusVersie.py
+	Versienummer en -datum van het programma BAGextract+. Bij elke nieuwe versie
+	van de tooling, moet deze worden aangepast.
+
+ - libBAG.py
+	Bibliotheek met classes voor de 7 BAG-objecttypes. Deze classes omvatten 
+	functionaliteit voor het lezen uit XML en het lezen en schrijven van de 
+	objecten in de database.
+
+ - libDatabase.py
+	Bibliotheek met algemene functionaliteit voor toegang tot de BAG-database.
+
+ - libLog.py
+	Bibliotheek met algemene functionaliteit voor loggingfunctionaliteit. Deze 
+	functionaliteit schrijft tijdens het uitvoeren van een programma voortgangs-
+	informatie op het scherm en in een logfile BAGX+Logfile.log zodat deze 
+	informatie na afloop nog kan worden geraadpleegd.
+
+ - ligBAGconfiguratie.py
+	Bibliotheek met algemene functionaliteit voor het lezen van de BAG.conf 
+	configuratiefile.
+
+ - libUnzip.py
+	Bibliotheek met functionaliteit voor het uitpakken (unzippen) van de 
+	gecomprimeerde extractbestanden die worden geleverd door de BAGLV.
+
+ - makeBAGextract+.bat
+	Batchbestand voor het maken van een executable van BAGextract+. Dit script 
+	start de Pythoncompiler voor het compileren van de broncode tot een 
+	executable. De executable en bijbehorende bestanden worden gekopieerd naar 
+	de map 'exe'.
+
+ - setupBAGextract+.py
+	Pythoncode voor het compileren van een executable van BAGextract+
+
+
+ - Rijksmonumenten.txt
+	Voorbeeldbestand voor het vergelijken van BAG-gegevens met eigen data. Dit 
+	bestand bevat een uittreksel van het Rijksmonumentenregister.
+	Met dank aan de Rijksdienst voor het Cultureel Erfgoed.
+
+ - RijksmonumentenView.txt
+	Voorbeeldbestand voor het vergelijken van BAG-gegevens met eigen data. Dit 
+	bestand bevat de definitie van een standaardview op de eigen data, horend bij 
+	het voorbeeldbestand Rijksmonumenten.txt
