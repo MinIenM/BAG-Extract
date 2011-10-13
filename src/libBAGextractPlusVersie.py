@@ -23,11 +23,15 @@
 #                             Veldlengte voor tekstwaarde van geometrie verhoogt naar 1000000
 #               versie 1.7   11 maart 2011
 #                             Objecttype LPL en SPL vervangen door LIG en STA
+#               versie 1.8   13 oktober 2011
+#                             Indexen toegevoegd voor performanceverbetering
+#                             Check en waarschuwing op inladen GML-extract toegevoegd
+
 
 #
 # Ministerie van Volkshuisvesting, Ruimtelijke Ordening en Milieubeheer
 #------------------------------------------------------------------------------
 
-BAGextractPlusVersie = "1.7"
-BAGextractPlusDatum  = "maart 2011"
+BAGextractPlusVersie = "1.8"
+BAGextractPlusDatum  = "oktober 2011"
 
