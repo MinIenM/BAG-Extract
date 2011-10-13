@@ -3,6 +3,10 @@
 # Omschrijving: Hoofdmodule van de BAG Extract+ tools.
 # Auteur:       Matthijs van der Deijl
 #
+# Versie:       1.8
+#               - Controle en waarschuwing bij inladen GML-extract toegevoegd.
+#               13 oktober 2011
+#
 # Versie:       1.7
 #               - objecttype LPL vervangen door LIG
 #               - objecttype SPL vervangen door STA
@@ -202,6 +206,11 @@ class BAGExtractPlus(wx.Frame):
                                             teller += 1
                                             self.app.Yield(True)
                                     log.schrijfTimer("=> %d objecten toegevoegd" %(teller))
+                                    if teller == 0:
+                                        for xmlObject in xml.getElementsByTagName("product_LVC_gml:LVC-GML-product"):
+                                            teller += 1
+                                        if teller > 0:
+                                            log("*** Waarschuwing *** Bestand is een BAG-extact in GML-formaat; BAG Extract+ verwerkt alleen BAG-extracten in XML-formaat!")
                                     xml.unlink()
                                     verwerkteBestanden += 1
                                 except Exception, foutmelding:
