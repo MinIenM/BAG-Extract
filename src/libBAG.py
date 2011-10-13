@@ -14,6 +14,10 @@
 #
 # Auteur:       Matthijs van der Deijl
 #
+# Versie:       1.8
+#               - extra indexen toegevoegd op aangeven van RCE
+#               13 oktober 2011
+#
 # Versie:       1.7
 #               - objecttype LPL vervangen door LIG
 #               - objecttype SPL vervangen door STA
@@ -414,6 +418,12 @@ class BAGobject:
         sql += ")"
         database.maakIndex(self.naam() + "key", sql)
 
+        sql  = "CREATE INDEX " + self.naam() + "Identificatie"
+        sql += " ON " + self.naam() + " "
+        sql += "(identificatie"
+        sql += ")"
+        database.maakIndex(self.naam() + "Identificatie", sql)
+
         if self.heeftGeometrie():
             sql  = "CREATE UNIQUE INDEX " + self.naam() + "OID"
             sql += " ON " + self.naam() + " (oid)"
@@ -702,6 +712,10 @@ class Woonplaats(BAGobject):
         sql += " ON woonplaats" 
         sql += "(woonplaatsNaam)"
         database.maakIndex("woonplaatsNaam", sql)
+        sql  = "CREATE INDEX woonplaatsNaamUpper"
+        sql += " ON woonplaats" 
+        sql += "(upper(woonplaatsNaam))"
+        database.maakIndex("woonplaatsNaamUpper", sql)
 
     def maakViews(self):
         self.maakViewActueel()
@@ -747,6 +761,10 @@ class OpenbareRuimte(BAGobject):
         sql += " ON openbareruimte" 
         sql += "(openbareruimtenaam)"
         database.maakIndex("openbareruimteNaam", sql)
+        sql  = "CREATE INDEX openbareruimteNaamUpper"
+        sql += " ON openbareruimte" 
+        sql += "(upper(openbareruimtenaam))"
+        database.maakIndex("openbareruimteNaamUpper", sql)
 
     def maakViews(self):
         self.maakViewActueel()
@@ -835,6 +853,18 @@ class Nummeraanduiding(BAGobject):
         sql += " ON nummeraanduiding" 
         sql += "(postcode)"
         database.maakIndex("nummeraanduidingPostcode", sql)
+        sql  = "CREATE INDEX nummeraanduidingPostcodeUpper"
+        sql += " ON nummeraanduiding" 
+        sql += "(upper(postcode))"
+        database.maakIndex("nummeraanduidingPostcodeUpper", sql)
+        sql  = "CREATE INDEX nummeraanduidingHuisnummer"
+        sql += " ON nummeraanduiding" 
+        sql += "(huisnummer)"
+        database.maakIndex("nummeraanduidingHuisnummer", sql)
+        sql  = "CREATE INDEX nummeraanduidingGerelateerdeOpenbareRuimte"
+        sql += " ON nummeraanduiding" 
+        sql += "(gerelateerdeopenbareruimte)"
+        database.maakIndex("nummeraanduidingGerelateerdeOpenbareRuimte", sql)
         
     def maakViews(self):
         self.maakViewActueel()
@@ -1028,6 +1058,14 @@ class Verblijfsobject(BAGadresseerbaarObject):
         BAGadresseerbaarObject.maakIndex(self)
         BAGobject.maakIndexRelatie(self, self.gebruiksdoelVerblijfsobject)
         BAGobject.maakIndexRelatie(self, self.gerelateerdPand)
+        sql  = "CREATE INDEX verblijfsobjectHoofdadres"
+        sql += " ON verblijfsobject"
+        sql += "(hoofdadres)"
+        database.maakIndex("verblijfsobjectHoofdadres", sql)
+        sql  = "CREATE INDEX verblijfsobjectGerelateerdPand"
+        sql += " ON verblijfsobjectpand"
+        sql += "(gerelateerdpand)"
+        database.maakIndex("verblijfsobjectGerelateerdPand", sql)
 
     def maakViews(self):
         self.maakViewActueel()
